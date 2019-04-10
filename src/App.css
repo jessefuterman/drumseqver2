@@ -19,6 +19,11 @@
   color: white;
 }
 
+.SequenceStepLook {
+  background-color: blueviolet;
+  height: 100px;
+}
+
 .App-link {
   color: #61dafb;
 }
