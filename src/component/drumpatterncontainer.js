@@ -6,7 +6,7 @@ class DrumPatternContainer  extends Component {
       return (
         <div className="DrumPatternContainer">
          
-        <SequenceStep className = "SequenceStepLook"> daddi like</SequenceStep>
+        <SequenceStep className = "SequenceStep"> daddi like</SequenceStep>
         
 
 
