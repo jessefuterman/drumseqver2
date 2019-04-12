@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import './App.css';
 import DrumPatternContainer from "./component/drumpatterncontainer.js";
-import SequenceStep from "./component/sequencestep.js"
 
 class App extends Component {
   render() {
