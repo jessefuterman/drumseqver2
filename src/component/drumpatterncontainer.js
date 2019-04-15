@@ -3,42 +3,32 @@ import React, { Component } from "react";
 import { Tone } from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
+
 class DrumPatternContainer extends Component {
-  
-  constructor(props){
-    super(props)
-  this.metronome = this.metronome.bind(this)
-  
-  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      playing: false
+    };
+    this.metronome = this.metronome.bind(this);
   }
 
-  
+  metronome() {
+    console.log("imbeingpressed:)");
+    let player = Tone.Player({
+      url: "./Users/jackfuterman/Desktop/kick.wav",
+      autostart: true
+    }).toMaster();
+
+    console.log(player);
+  }
+
   render() {
-    
-    // metronome() {
-    //   let players;
-    //   players = new Tone.Players("./desktop/kick.wav").toMaster();
-
-    //   let index = 0;
-
-    //   Tone.Transport.scheduleRepeat(repeat, "16n");
-    //   Tone.Transport.start();
-
-      
-
-       
-
-    //     index++;
-    //   }
-  }
-
-    
-
-    
-
-
     return (
       <div className="DrumPatternContainer">
+        <button onClick={this.metronome}>METRONOME BRO</button>
+
         <SeqColumn />
         <SeqColumn />
         <SeqColumn />
@@ -57,8 +47,7 @@ class DrumPatternContainer extends Component {
         <SeqColumn />
       </div>
     );
-  };
-  
-
+  }
+}
 
 export default DrumPatternContainer;
