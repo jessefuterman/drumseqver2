@@ -10,44 +10,72 @@ class DrumPatternContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { bpm: 0 };
-    this.metronome = this.metronome.bind(this);
-    this.submitBpm = this.submitBpm.bind(this);
-    this.stop = this.stop.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.state = { inputBpm: 0, isSeqPlaying: false, counter: 0 };
+    console.log(this.state);
+    this.interval = undefined;
   }
 
-  handleChange(event) {
+  handleChange = event => {
     event.preventDefault();
-    this.setState({ bpm: event.target.value });
-
-    console.log(this.setState);
+    this.setState({ inputBpm: event.target.value });
+    console.log("this is the state", this.state);
+    console.log(event.target.value);
     console.log("is this working?");
-  }
+  };
 
-  submitBpm(event) {
-    event.preventDefault();
-    Tone.Transport.bpm.value = this.setState.bpm;
-    console.log(Tone.Transport.bpm.value);
-  }
+  componentDidMount = () => {
+    this.metronome();
+  };
 
-  stop() {
-    Tone.Transport.stop();
-    console.log("stop is click");
-  }
-  metronome() {
+  metronome = () => {
     console.log("imbeingpressed:)");
 
+    Tone.Transport.scheduleRepeat(function(time) {
+      synth.triggerAttackRelease("C2", "8n");
+    }, "4n");
+
     synth.volume.value = 1;
-    synth.triggerAttackRelease("C2", "8n");
+
     console.log(synth);
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    Tone.Transport.start();
+    this.setState({ isSeqPlaying: true });
+
+    this.interval = setInterval(() => {
+      this.setState({ counter: this.state.counter + 1 });
+    }, (60 / this.state.inputBpm) * 1000);
+    console.log("before bpm change", Tone.Transport.bpm.value);
+    Tone.Transport.bpm.value = this.state.inputBpm;
+    console.log("after bpm change", Tone.Transport.bpm.value);
+  };
+
+  stop = () => {
+    this.setState({ isSeqPlaying: false, counter: 0 });
+    clearInterval(this.interval);
+    this.interval = undefined;
+    Tone.Transport.stop();
+    console.log("stop is click");
+  };
+
+  componentWillMount() {
+    this.interval = undefined;
   }
+
+  lightupLogic = nb => {
+    let lightUp = this.state.counter % 16;
+
+    if (this.state.isSeqPlaying === true && lightUp === nb) {
+      return true;
+    }
+    return false;
+  };
 
   render() {
     return (
       <div className="DrumPatternContainer">
-        <button onClick={this.metronome}>kick sound</button>
-
         <button onClick={this.stop}>Stop</button>
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -59,22 +87,22 @@ class DrumPatternContainer extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
-        <SeqColumn />
+        <SeqColumn greeting={this.lightupLogic(0)} />
+        <SeqColumn greeting={this.lightupLogic(1)} />
+        <SeqColumn greeting={this.lightupLogic(2)} />
+        <SeqColumn greeting={this.lightupLogic(3)} />
+        <SeqColumn greeting={this.lightupLogic(4)} />
+        <SeqColumn greeting={this.lightupLogic(5)} />
+        <SeqColumn greeting={this.lightupLogic(6)} />
+        <SeqColumn greeting={this.lightupLogic(7)} />
+        <SeqColumn greeting={this.lightupLogic(8)} />
+        <SeqColumn greeting={this.lightupLogic(9)} />
+        <SeqColumn greeting={this.lightupLogic(10)} />
+        <SeqColumn greeting={this.lightupLogic(11)} />
+        <SeqColumn greeting={this.lightupLogic(12)} />
+        <SeqColumn greeting={this.lightupLogic(13)} />
+        <SeqColumn greeting={this.lightupLogic(14)} />
+        <SeqColumn greeting={this.lightupLogic(15)} />
       </div>
     );
   }
