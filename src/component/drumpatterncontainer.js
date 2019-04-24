@@ -4,8 +4,6 @@ import Tone from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
 
-// var player = new Tone.Player("./metronome.flac").toMaster();
-
 let synth = new Tone.MembraneSynth().toMaster();
 class DrumPatternContainer extends Component {
   constructor(props) {
@@ -25,38 +23,23 @@ class DrumPatternContainer extends Component {
   };
 
   componentDidMount = () => {
-    // console.log("in componentDidMount");
-    // let player = new Tone.Player({
-    //   url: "./metronome.mp3",
-    //   loop: true
-    // }).toMaster();
-
-    
-    // document.querySelector("tone-player").bind(player);
-    // document.querySelector("tone-play-toggle").bind(player);
-   
-    
-    let buffer = new Tone.Buffer({
-      
-      url: "./metronome.mp3",
-      onload: () => {
-        console.log("in player");
-        
-      },
-
-      onerror: () => {
-        console.log("error");
-      }
+    // var buffer = new Tone.Buffer(
+      // "/Users/jackfuterman/Desktop/metronome.flac"
       // function() {
       //   //the buffer is now available.
       //   var buff = buffer.get();
       //   console.log("this is buff" , buff);
       // }
-    });
+    // );
+    
   };
 
   metronome = () => {
     console.log("imbeingpressed:)");
+
+    Tone.Transport.scheduleRepeat(function(time) {
+      synth.triggerAttackRelease("C2", "8n");
+    }, "4n");
 
     synth.volume.value = 1;
 
