@@ -37,13 +37,14 @@ class SeqColumn extends Component {
       return this.state.defaultColumnColor;
     }
   };
+
   render() {
     return (
       <div
         className="SeqColumn"
         style={{ background: "#" + this.backgroundColorPicker() }}
       >
-        <SequenceStep className="SequenceStep" />
+        <SequenceStep propBase ={this.props.propBase} className="SequenceStep" />
         <SequenceStep className="SequenceStep" />
         <SequenceStep className="SequenceStep" />
         <SequenceStep className="SequenceStep" />

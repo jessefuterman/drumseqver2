@@ -1,9 +1,21 @@
 import React, { Component } from "react";
-
+import metronomeSound from "../sounds/metronome.wav";
+import kickSound from "../sounds/kick.wav";
 import Tone from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
 
+var metronome = new Tone.Player({
+  url: metronomeSound,
+
+  autostart: false
+}).toMaster();
+
+var kick = new Tone.Player({
+  url: kickSound,
+
+  autostart: false
+}).toMaster();
 let synth = new Tone.MembraneSynth().toMaster();
 class DrumPatternContainer extends Component {
   constructor(props) {
@@ -23,27 +35,31 @@ class DrumPatternContainer extends Component {
   };
 
   componentDidMount = () => {
-    // var buffer = new Tone.Buffer(
-      // "/Users/jackfuterman/Desktop/metronome.flac"
-      // function() {
-      //   //the buffer is now available.
-      //   var buff = buffer.get();
-      //   console.log("this is buff" , buff);
-      // }
-    // );
-    
+    // var buffer = new Tone.Buffer(metronomeSound, function() {
+    //   //the buffer is now available.
+    //   var buff = buffer.get();
+    //   console.log("this is buff", buff);
+    // });
+    // var buffers = new Tone.Buffers({
+    //   kickSound: kickSound,
+    //   metronome: metronomeSound
+    // });
+    // console.log("this is buff", buffers);
   };
 
   metronome = () => {
     console.log("imbeingpressed:)");
 
     Tone.Transport.scheduleRepeat(function(time) {
-      synth.triggerAttackRelease("C2", "8n");
+      metronome.start();
+      kick.start();
     }, "4n");
 
-    synth.volume.value = 1;
-
     console.log(synth);
+  };
+
+  propBase = () => {
+    console.log("FUK YEAH");
   };
 
   handleSubmit = event => {
@@ -94,22 +110,23 @@ class DrumPatternContainer extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <SeqColumn greeting={this.lightupLogic(0)} />
-        <SeqColumn greeting={this.lightupLogic(1)} />
-        <SeqColumn greeting={this.lightupLogic(2)} />
-        <SeqColumn greeting={this.lightupLogic(3)} />
-        <SeqColumn greeting={this.lightupLogic(4)} />
-        <SeqColumn greeting={this.lightupLogic(5)} />
-        <SeqColumn greeting={this.lightupLogic(6)} />
-        <SeqColumn greeting={this.lightupLogic(7)} />
-        <SeqColumn greeting={this.lightupLogic(8)} />
-        <SeqColumn greeting={this.lightupLogic(9)} />
-        <SeqColumn greeting={this.lightupLogic(10)} />
-        <SeqColumn greeting={this.lightupLogic(11)} />
-        <SeqColumn greeting={this.lightupLogic(12)} />
-        <SeqColumn greeting={this.lightupLogic(13)} />
-        <SeqColumn greeting={this.lightupLogic(14)} />
-        <SeqColumn greeting={this.lightupLogic(15)} />
+
+        <SeqColumn greeting={this.lightupLogic(0)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(1)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(4)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(5)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(6)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(7)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(8)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(9)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(10)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(11)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(12)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(13)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(14)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(15)} propBase={this.propBase} />
       </div>
     );
   }

@@ -16,8 +16,11 @@ class SequenceStep extends Component {
 
   handleClick = event => {
     event.preventDefault();
+
+    this.props.propBase();
     console.log("we gettin clicked");
     this.setState({ isPressed: true });
+
     if (this.state.isPressed === true) {
       return this.setState({ isPressed: false });
     }
@@ -36,7 +39,8 @@ class SequenceStep extends Component {
       <button
         onClick={this.handleClick}
         style={{ background: "#" + this.style() }}
-        className="SequenceStep"/>
+        className="SequenceStep"
+      />
     );
   }
 }
