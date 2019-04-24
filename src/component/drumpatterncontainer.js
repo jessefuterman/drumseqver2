@@ -4,8 +4,9 @@ import Tone from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
 
-let synth = new Tone.MembraneSynth().toMaster();
+// var player = new Tone.Player("./metronome.flac").toMaster();
 
+let synth = new Tone.MembraneSynth().toMaster();
 class DrumPatternContainer extends Component {
   constructor(props) {
     super(props);
@@ -24,15 +25,38 @@ class DrumPatternContainer extends Component {
   };
 
   componentDidMount = () => {
-    this.metronome();
+    // console.log("in componentDidMount");
+    // let player = new Tone.Player({
+    //   url: "./metronome.mp3",
+    //   loop: true
+    // }).toMaster();
+
+    
+    // document.querySelector("tone-player").bind(player);
+    // document.querySelector("tone-play-toggle").bind(player);
+   
+    
+    let buffer = new Tone.Buffer({
+      
+      url: "./metronome.mp3",
+      onload: () => {
+        console.log("in player");
+        
+      },
+
+      onerror: () => {
+        console.log("error");
+      }
+      // function() {
+      //   //the buffer is now available.
+      //   var buff = buffer.get();
+      //   console.log("this is buff" , buff);
+      // }
+    });
   };
 
   metronome = () => {
     console.log("imbeingpressed:)");
-
-    Tone.Transport.scheduleRepeat(function(time) {
-      synth.triggerAttackRelease("C2", "8n");
-    }, "4n");
 
     synth.volume.value = 1;
 
@@ -43,7 +67,7 @@ class DrumPatternContainer extends Component {
     event.preventDefault();
     Tone.Transport.start();
     this.setState({ isSeqPlaying: true });
-
+    this.metronome();
     this.interval = setInterval(() => {
       this.setState({ counter: this.state.counter + 1 });
     }, (60 / this.state.inputBpm) * 1000);

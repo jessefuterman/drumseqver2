@@ -45,8 +45,8 @@ class SeqColumn extends Component {
       >
         <SequenceStep className="SequenceStep" />
         <SequenceStep className="SequenceStep" />
-        <SequenceStep clssName="SequenceStep" />
-        <SequenceStep clssName="SequenceStep" />
+        <SequenceStep className="SequenceStep" />
+        <SequenceStep className="SequenceStep" />
       </div>
     );
   }
