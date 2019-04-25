@@ -41,7 +41,7 @@ class DrumPatternContainer extends Component {
   };
 
   componentDidMount = () => {
-    // var buffer = new Tone.Buffer(metronomeSound, function() {
+    //  var buffer = new Tone.Buffer(metronomeSound, function() {
     //   //the buffer is now available.
     //   var buff = buffer.get();
     //   console.log("this is buff", buff);
@@ -58,29 +58,46 @@ class DrumPatternContainer extends Component {
 
     Tone.Transport.scheduleRepeat(function(time) {
       metronome.start();
-      kick.start();
     }, "4n");
 
     console.log(synth);
   };
 
-  propBase = () => {
+  propBase = boolean => {
+    if (this.state.counter === 1 && this.state.isPressed === false) {
+      console.log("we inside!?");
+      return kick.start();
+    }
+    if (this.state.counter === 2) {
+      return console.log("I am button two row two");
+    }
     console.log("FUK YEAH");
+    console.log("this is arg", boolean);
   };
 
   handleSubmit = event => {
     event.preventDefault();
     Tone.Transport.start();
-    this.setState({ isSeqPlaying: true });
+    this.setState({ isSeqPlaying: true, counter: this.state.counter + 1 });
     this.metronome();
 
     this.interval = setInterval(() => {
+      this.resetCounter();
+      this.propBase();
       this.setState({ counter: this.state.counter + 1 });
     }, (60 / this.state.inputBpm) * 1000);
     console.log("before bpm change", Tone.Transport.bpm.value);
     Tone.Transport.bpm.value = this.state.inputBpm;
     console.log("after bpm change", Tone.Transport.bpm.value);
     console.log("counter is here", this.state.counter);
+  };
+
+  resetCounter = () => {
+    if (this.state.counter === 16) {
+      this.setState({ counter: this.state.counter * 0 });
+    }
+
+    console.log("we in resetcounter bitch");
   };
 
   stop = () => {
@@ -100,16 +117,12 @@ class DrumPatternContainer extends Component {
     // this.columnLogic();
 
     if (this.state.isSeqPlaying === true && lightUp === nb) {
-      this.columnLogic();
       return true;
     }
     return false;
   };
 
-  columnLogic = () => {
-    this.setState({ currentColumn: this.state.currentColumn + 1 });
-
-  };
+  c;
 
   render() {
     return (
@@ -126,7 +139,6 @@ class DrumPatternContainer extends Component {
           <input type="submit" value="Submit" />
         </form>
 
-        <SeqColumn greeting={this.lightupLogic(0)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(1)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase} />
@@ -142,6 +154,7 @@ class DrumPatternContainer extends Component {
         <SeqColumn greeting={this.lightupLogic(13)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(14)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(15)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(16)} propBase={this.propBase} />
       </div>
     );
   }
