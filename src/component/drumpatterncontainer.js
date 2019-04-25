@@ -21,8 +21,14 @@ class DrumPatternContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { inputBpm: 0, isSeqPlaying: false, counter: 0 };
+    this.state = {
+      inputBpm: 0,
+      isSeqPlaying: false,
+      counter: 0,
+      currentColumn: 0
+    };
     console.log(this.state);
+    console.log(this.state.counter);
     this.interval = undefined;
   }
 
@@ -67,16 +73,18 @@ class DrumPatternContainer extends Component {
     Tone.Transport.start();
     this.setState({ isSeqPlaying: true });
     this.metronome();
+
     this.interval = setInterval(() => {
       this.setState({ counter: this.state.counter + 1 });
     }, (60 / this.state.inputBpm) * 1000);
     console.log("before bpm change", Tone.Transport.bpm.value);
     Tone.Transport.bpm.value = this.state.inputBpm;
     console.log("after bpm change", Tone.Transport.bpm.value);
+    console.log("counter is here", this.state.counter);
   };
 
   stop = () => {
-    this.setState({ isSeqPlaying: false, counter: 0 });
+    this.setState({ isSeqPlaying: false, counter: 0, currentColumn: 0 });
     clearInterval(this.interval);
     this.interval = undefined;
     Tone.Transport.stop();
@@ -89,11 +97,18 @@ class DrumPatternContainer extends Component {
 
   lightupLogic = nb => {
     let lightUp = this.state.counter % 16;
+    // this.columnLogic();
 
     if (this.state.isSeqPlaying === true && lightUp === nb) {
+      this.columnLogic();
       return true;
     }
     return false;
+  };
+
+  columnLogic = () => {
+    this.setState({ currentColumn: this.state.currentColumn + 1 });
+
   };
 
   render() {

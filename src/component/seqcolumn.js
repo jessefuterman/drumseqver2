@@ -21,14 +21,6 @@ class SeqColumn extends Component {
     console.log("is this working?");
   };
 
-  // onChange (value) {
-  //   if(value) {
-  //     this.setState({background: '[WHATEVER COLOR YOU WANT IT TO CHANGE TO]'})
-  //   } else {
-  //     this.setState({background: ''})
-  //   }
-  // }
-
   backgroundColorPicker = () => {
     let isSeqPlaying = this.props.greeting;
     if (isSeqPlaying === true) {
@@ -43,11 +35,11 @@ class SeqColumn extends Component {
       <div
         className="SeqColumn"
         style={{ background: "#" + this.backgroundColorPicker() }}
-      >
-        <SequenceStep propBase ={this.props.propBase} className="SequenceStep" />
-        <SequenceStep className="SequenceStep" />
-        <SequenceStep className="SequenceStep" />
-        <SequenceStep className="SequenceStep" />
+      > 
+        <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
+        <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
+        <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
+        <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
       </div>
     );
   }
