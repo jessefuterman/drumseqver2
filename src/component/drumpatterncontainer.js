@@ -4,6 +4,7 @@ import kickSound from "../sounds/kick.wav";
 import Tone from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
+import { bool } from "prop-types";
 
 var metronome = new Tone.Player({
   url: metronomeSound,
@@ -25,7 +26,8 @@ class DrumPatternContainer extends Component {
       inputBpm: 0,
       isSeqPlaying: false,
       counter: 0,
-      currentColumn: 0
+      currentColumn: 0,
+      isPressed: false
     };
     console.log(this.state);
     console.log(this.state.counter);
@@ -64,15 +66,25 @@ class DrumPatternContainer extends Component {
   };
 
   propBase = boolean => {
-    if (this.state.counter === 1 && this.state.isPressed === false) {
+    console.log("this is arg", boolean);
+    
+
+    
+    if (this.state.isPressed) {
+      console.log("this is arg at 1", boolean);
+      return kick.start();
+    }
+    if (this.isPressed === true) {
+      console.log("this is arg at 2", boolean);
+      return kick.start();
+    }
+    if (this.state.counter === 3 && this.state.isPressed) {
       console.log("we inside!?");
       return kick.start();
     }
-    if (this.state.counter === 2) {
-      return console.log("I am button two row two");
+    if (this.state.counter === 4 && this.state.isPressed) {
+      kick.start();
     }
-    console.log("FUK YEAH");
-    console.log("this is arg", boolean);
   };
 
   handleSubmit = event => {
@@ -83,21 +95,17 @@ class DrumPatternContainer extends Component {
 
     this.interval = setInterval(() => {
       this.resetCounter();
-      this.propBase();
+
       this.setState({ counter: this.state.counter + 1 });
     }, (60 / this.state.inputBpm) * 1000);
     console.log("before bpm change", Tone.Transport.bpm.value);
     Tone.Transport.bpm.value = this.state.inputBpm;
-    console.log("after bpm change", Tone.Transport.bpm.value);
-    console.log("counter is here", this.state.counter);
   };
 
   resetCounter = () => {
     if (this.state.counter === 16) {
       this.setState({ counter: this.state.counter * 0 });
     }
-
-    console.log("we in resetcounter bitch");
   };
 
   stop = () => {
@@ -105,7 +113,6 @@ class DrumPatternContainer extends Component {
     clearInterval(this.interval);
     this.interval = undefined;
     Tone.Transport.stop();
-    console.log("stop is click");
   };
 
   componentWillMount() {
@@ -117,12 +124,11 @@ class DrumPatternContainer extends Component {
     // this.columnLogic();
 
     if (this.state.isSeqPlaying === true && lightUp === nb) {
+      this.propBase();
       return true;
     }
     return false;
   };
-
-  c;
 
   render() {
     return (
@@ -141,6 +147,7 @@ class DrumPatternContainer extends Component {
 
         <SeqColumn greeting={this.lightupLogic(1)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} />
+
         <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(4)} propBase={this.propBase} />
         <SeqColumn greeting={this.lightupLogic(5)} propBase={this.propBase} />

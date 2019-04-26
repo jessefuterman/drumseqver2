@@ -17,11 +17,10 @@ class SequenceStep extends Component {
   handleClick = event => {
     event.preventDefault();
 
-    this.props.propBase(this.state.isPressed === true);
-    
     console.log("we gettin clicked");
     this.setState({ isPressed: true });
     console.log("does it read this far");
+    this.props.propBase(this.state.isPressed);
     if (this.state.isPressed === true) {
       return this.setState({ isPressed: false });
     }
