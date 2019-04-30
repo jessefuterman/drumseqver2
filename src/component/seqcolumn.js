@@ -36,6 +36,7 @@ class SeqColumn extends Component {
         className="SeqColumn"
         style={{ background: "#" + this.backgroundColorPicker() }}
       >
+       <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
         <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
         <SequenceStep propBase={this.props.propBase} className="SequenceStep" />
         <SequenceStep propBase={this.props.propBase} className="SequenceStep" />

@@ -4,7 +4,6 @@ import kickSound from "../sounds/kick.wav";
 import Tone from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
-import { bool } from "prop-types";
 
 var metronome = new Tone.Player({
   url: metronomeSound,
@@ -65,17 +64,18 @@ class DrumPatternContainer extends Component {
     console.log(synth);
   };
 
-  propBase = boolean => {
+  propBase = (boolean, bool, numR) => {
     console.log("this is arg", boolean);
-    
+    console.log("this is arg two", bool);
 
-    
-    if (this.state.isPressed) {
+    if (this.state.isPressed === true && this.state.counter === 1) {
       console.log("this is arg at 1", boolean);
+      console.log("we are in row 1");
       return kick.start();
     }
-    if (this.isPressed === true) {
+    if (this.isPressed === true && this.state.counter === 2) {
       console.log("this is arg at 2", boolean);
+      console.log("we are in row 2");
       return kick.start();
     }
     if (this.state.counter === 3 && this.state.isPressed) {
@@ -124,7 +124,6 @@ class DrumPatternContainer extends Component {
     // this.columnLogic();
 
     if (this.state.isSeqPlaying === true && lightUp === nb) {
-      this.propBase();
       return true;
     }
     return false;
