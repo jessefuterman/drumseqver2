@@ -25,8 +25,7 @@ class DrumPatternContainer extends Component {
       inputBpm: 0,
       isSeqPlaying: false,
       counter: 0,
-      currentColumn: 0,
-      isPressed: false
+      currentColumn: 0
     };
     console.log(this.state);
     console.log(this.state.counter);
@@ -64,9 +63,9 @@ class DrumPatternContainer extends Component {
     console.log(synth);
   };
 
-  propBase = (boolean, bool, numR) => {
+  propBase = (boolean, nb) => {
     console.log("this is arg", boolean);
-    console.log("this is arg two", bool);
+    console.log("this is arg two", nb);
 
     if (this.state.isPressed === true && this.state.counter === 1) {
       console.log("this is arg at 1", boolean);
@@ -85,6 +84,10 @@ class DrumPatternContainer extends Component {
     if (this.state.counter === 4 && this.state.isPressed) {
       kick.start();
     }
+  };
+
+  workBase = str => {
+    console.log(str, "the arg");
   };
 
   handleSubmit = event => {
@@ -144,7 +147,11 @@ class DrumPatternContainer extends Component {
           <input type="submit" value="Submit" />
         </form>
 
-        <SeqColumn greeting={this.lightupLogic(1)} propBase={this.propBase} />
+        <SeqColumn
+          greeting={this.lightupLogic(1)}
+          propBase={this.propBase}
+          workBase={this.workBase}
+        />
         <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} />
 
         <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase} />

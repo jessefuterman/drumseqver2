@@ -28,15 +28,15 @@ class SequenceStep extends Component {
 
     console.log("button 1");
 
-   
     this.setState({ isPressed: false });
-    this.props.propBase(this.state.isPressed);
+    this.props.propBase(this.setState({ isPressed: false}));
+    this.props.workBase("hello")
+
     if (this.state.isPressed === false) {
-      return this.setState({ isPressed: true });
+      this.setState({ isPressed: true });
     }
-    if (this.state.isPressed === false) {
-      this.setState({isPressedTwo: false})
-    }
+
+    
 
     //           this.buttonTwo();
 
