@@ -45,16 +45,16 @@ class DrumPatternContainer extends Component {
   };
 
   componentDidMount = () => {
-    //  var buffer = new Tone.Buffer(metronomeSound, function() {
-    //   //the buffer is now available.
-    //   var buff = buffer.get();
-    //   console.log("this is buff", buff);
-    // });
-    // var buffers = new Tone.Buffers({
-    //   kickSound: kickSound,
-    //   metronome: metronomeSound
-    // });
-    // console.log("this is buff", buffers);
+     var buffer = new Tone.Buffer(metronomeSound, function() {
+      //the buffer is now available.
+      var buff = buffer.get();
+      console.log("this is buff", buff);
+    });
+    var buffers = new Tone.Buffers({
+      kickSound: kickSound,
+      metronome: metronomeSound
+    });
+    console.log("this is buff", buffers);
   };
 
   metronome = () => {
@@ -68,12 +68,22 @@ class DrumPatternContainer extends Component {
   };
 
   seqBrainKick = () => {
-    if (this.state.isPressed1 === false && this.state.counter) {
+    if (this.state.counter === 0 && this.state.isPressed1 === true) {
       console.log("we are in row 1");
-      return this.buttonOne();
+      console.log("this is state", this.state.isPressed1);
+      
+      kick.start();
     }
-    if (this.buttonOne(this.state.isPressed === false) && this.state.counter) {
-      return this.buttonOne();
+    console.log("does it go here?!?!" && this.state.isPressed1 === true);
+    if (this.state.counter === 1 && this.state.isPressed1 === true) {
+      console.log("we are in row 2");
+      
+      kick.start();
+    }
+    if (this.state.counter === 2 && this.state.isPressed1 === true) {
+      console.log("we are in row 3");
+      
+      kick.start();
     }
   };
 
@@ -125,11 +135,10 @@ class DrumPatternContainer extends Component {
     Tone.Transport.start();
     this.setState({ isSeqPlaying: true, counter: this.state.counter + 1 });
     this.metronome();
-    this.seqBrainKick();
 
     this.interval = setInterval(() => {
       this.resetCounter();
-
+      this.seqBrainKick();
       this.setState({ counter: this.state.counter + 1 });
     }, (60 / this.state.inputBpm) * 1000);
     console.log("before bpm change", Tone.Transport.bpm.value);

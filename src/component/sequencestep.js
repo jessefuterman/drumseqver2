@@ -7,31 +7,24 @@ class SequenceStep extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeColor: white,
-      pushedColor: black,
-      isPressed: true,
-
-      isPressedTwo: true,
-      isPressedThree: true,
-      isPressedFour: true,
-      isPressedFive: true
+      activeColor: black,
+      pushedColor: white,
+      isPressed: false
     };
     console.log("state baby", this.state.isPressed);
   }
 
   handleClick = event => {
     event.preventDefault();
-    console.log(this.props)
+    console.log(this.props);
     ///this.setState({ isPressed: false });
 
-     this.setState({ isPressed: false });
+    this.setState({ isPressed: true });
     this.props.seqButton();
 
-    if (this.state.isPressed === false) {
-      this.setState({ isPressed: true });
+    if (this.state.isPressed === true) {
+      this.setState({ isPressed: false });
     }
-
-
 
     //           this.buttonTwo();
 
