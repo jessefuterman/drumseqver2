@@ -25,7 +25,11 @@ class DrumPatternContainer extends Component {
       inputBpm: 0,
       isSeqPlaying: false,
       counter: 0,
-      currentColumn: 0
+      isPressed1: false,
+      isPressed2: false,
+      isPressed3: false,
+      isPressed4: false,
+      ispressed5: false
     };
     console.log(this.state);
     console.log(this.state.counter);
@@ -63,31 +67,57 @@ class DrumPatternContainer extends Component {
     console.log(synth);
   };
 
-  propBase = (boolean, nb) => {
-    console.log("this is arg", boolean);
-    console.log("this is arg two", nb);
-
-    if (this.state.isPressed === true && this.state.counter === 1) {
-      console.log("this is arg at 1", boolean);
+  seqBrainKick = () => {
+    if (this.state.isPressed1 === false && this.state.counter) {
       console.log("we are in row 1");
-      return kick.start();
+      return this.buttonOne();
     }
-    if (this.isPressed === true && this.state.counter === 2) {
-      console.log("this is arg at 2", boolean);
-      console.log("we are in row 2");
-      return kick.start();
-    }
-    if (this.state.counter === 3 && this.state.isPressed) {
-      console.log("we inside!?");
-      return kick.start();
-    }
-    if (this.state.counter === 4 && this.state.isPressed) {
-      kick.start();
+    if (this.buttonOne(this.state.isPressed === false) && this.state.counter) {
+      return this.buttonOne();
     }
   };
 
-  workBase = str => {
-    console.log(str, "the arg");
+  buttonOne = () => {
+    console.log("i am button one");
+    console.log(this.kick);
+    this.setState({ isPressed1: true });
+    if (this.state.isPressed1 === true) {
+      this.setState({ isPressed1: false });
+    }
+
+    return kick.start();
+  };
+
+  buttonTwo = () => {
+    console.log("i am button two");
+    this.setState({ isPressed2: true });
+    if (this.state.isPressed2 === true) {
+      this.setState({ isPressed2: false });
+    }
+  };
+
+  buttonThree = () => {
+    console.log("button three");
+    this.setState({ isPressed3: true });
+    if (this.state.isPressed3 === true) {
+      this.setState({ isPressed3: false });
+    }
+  };
+
+  buttonFour = () => {
+    console.log("button four");
+    this.setState({ isPressed4: true });
+    if (this.state.isPressed4 === true) {
+      this.setState({ isPressed4: false });
+    }
+  };
+
+  buttonFive = () => {
+    console.log("button five");
+    this.setState({ isPressed5: true });
+    if (this.state.isPressed5 === true) {
+      this.setState({ isPressed5: false });
+    }
   };
 
   handleSubmit = event => {
@@ -95,6 +125,7 @@ class DrumPatternContainer extends Component {
     Tone.Transport.start();
     this.setState({ isSeqPlaying: true, counter: this.state.counter + 1 });
     this.metronome();
+    this.seqBrainKick();
 
     this.interval = setInterval(() => {
       this.resetCounter();
@@ -149,25 +180,133 @@ class DrumPatternContainer extends Component {
 
         <SeqColumn
           greeting={this.lightupLogic(1)}
-          propBase={this.propBase}
-          workBase={this.workBase}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
         />
-        <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn
+          greeting={this.lightupLogic(2)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
 
-        <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase}  workBase={this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(4)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(5)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(6)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(7)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(8)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(9)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(10)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(11)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(12)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(13)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(14)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(15)} propBase={this.propBase} workBase = {this.workBase}/>
-        <SeqColumn greeting={this.lightupLogic(16)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn
+          greeting={this.lightupLogic(3)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(4)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(5)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(6)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(7)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(8)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(9)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(10)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(11)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(12)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(13)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(14)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(15)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
+        <SeqColumn
+          greeting={this.lightupLogic(16)}
+          buttonOne={this.buttonOne}
+          buttonTwo={this.buttonTwo}
+          buttonThree={this.buttonThree}
+          buttonFour={this.buttonFour}
+          buttonFive={this.buttonFive}
+        />
       </div>
     );
   }

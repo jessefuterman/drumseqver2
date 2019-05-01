@@ -28,7 +28,7 @@ class SeqColumn extends Component {
     } else if (isSeqPlaying === false) {
       return this.state.defaultColumnColor;
     }
-  };
+  }
 
   render() {
     return (
@@ -36,11 +36,26 @@ class SeqColumn extends Component {
         className="SeqColumn"
         style={{ background: "#" + this.backgroundColorPicker() }}
       >
-        <SequenceStep propBase={this.props.propBase} workBase ={this.props.workbase} className="SequenceStep" />
-        <SequenceStep propBase={this.props.propBase} workbase ={this.props.workbase} className="SequenceStep" />
-        <SequenceStep propBase={this.props.propBase} workBase ={this.props.workbase} className="SequenceStep" />
-        <SequenceStep propBase={this.props.propBase} workbase ={this.props.workbase} className="SequenceStep" />
-        <SequenceStep propBase={this.props.propBase} workBase ={this.props.workbase} className="SequenceStep" />
+        <SequenceStep
+          seqButton={this.props.buttonOne}
+          className="SequenceStep"
+        />
+        <SequenceStep
+          seqButton={this.props.buttonTwo}
+          className="SequenceStep"
+        />
+        <SequenceStep
+          seqButton={this.props.buttonThree}
+          className="SequenceStep"
+        />
+        <SequenceStep
+          seqButton={this.props.buttonFour}
+          className="SequenceStep"
+        />
+        <SequenceStep
+          seqButton={this.props.buttonFive}
+          className="SequenceStep"
+        />
       </div>
     );
   }

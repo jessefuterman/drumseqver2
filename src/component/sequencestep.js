@@ -21,34 +21,27 @@ class SequenceStep extends Component {
 
   handleClick = event => {
     event.preventDefault();
-    console.log("I AM BUTTON 1 ROW 1");
-    console.log("we gettin clicked");
-
+    console.log(this.props)
     ///this.setState({ isPressed: false });
 
-    console.log("button 1");
-
-    this.setState({ isPressed: false });
-    this.props.propBase(this.setState({ isPressed: false}));
-    this.props.workBase("hello")
+     this.setState({ isPressed: false });
+    this.props.seqButton();
 
     if (this.state.isPressed === false) {
       this.setState({ isPressed: true });
     }
 
-    
+
 
     //           this.buttonTwo();
 
-    // this.setState({ isPressedThree: false });
+    //  this.setState({ isPressedTwo: false });
     // // this.props.propBase(this.state.isPressedThree);
 
     if (this.state.isPressedTwo === false) {
       return this.setState({ isPressedTwo: true });
     }
   };
-
-  ringo = () => {};
 
   style = () => {
     if (this.state.isPressed === true) {
