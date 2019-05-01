@@ -152,22 +152,22 @@ class DrumPatternContainer extends Component {
           propBase={this.propBase}
           workBase={this.workBase}
         />
-        <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(2)} propBase={this.propBase} workBase = {this.workBase}/>
 
-        <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(4)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(5)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(6)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(7)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(8)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(9)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(10)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(11)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(12)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(13)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(14)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(15)} propBase={this.propBase} />
-        <SeqColumn greeting={this.lightupLogic(16)} propBase={this.propBase} />
+        <SeqColumn greeting={this.lightupLogic(3)} propBase={this.propBase}  workBase={this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(4)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(5)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(6)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(7)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(8)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(9)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(10)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(11)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(12)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(13)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(14)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(15)} propBase={this.propBase} workBase = {this.workBase}/>
+        <SeqColumn greeting={this.lightupLogic(16)} propBase={this.propBase} workBase = {this.workBase}/>
       </div>
     );
   }
