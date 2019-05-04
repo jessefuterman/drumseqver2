@@ -19,9 +19,9 @@ class SequenceStep extends Component {
     console.log(this.props);
     ///this.setState({ isPressed: false });
 
+    this.props.allButtons(this.props.columnNum);
+    this.props.allButtons(this.state.isPressed === true);
     this.setState({ isPressed: true });
-    this.props.seqButton();
-
     if (this.state.isPressed === true) {
       this.setState({ isPressed: false });
     }
@@ -30,10 +30,6 @@ class SequenceStep extends Component {
 
     //  this.setState({ isPressedTwo: false });
     // // this.props.propBase(this.state.isPressedThree);
-
-    if (this.state.isPressedTwo === false) {
-      return this.setState({ isPressedTwo: true });
-    }
   };
 
   style = () => {

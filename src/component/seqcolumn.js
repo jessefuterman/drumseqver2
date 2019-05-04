@@ -15,12 +15,13 @@ class SeqColumn extends Component {
   }
   handleChange = event => {
     event.preventDefault();
+    
     this.setState({ columnColor: event.target.value });
     console.log("this is the state", this.state);
     console.log(event.target.value);
     console.log("is this working?");
   };
-
+  
   backgroundColorPicker = () => {
     let isSeqPlaying = this.props.greeting;
     if (isSeqPlaying === true) {
@@ -28,7 +29,7 @@ class SeqColumn extends Component {
     } else if (isSeqPlaying === false) {
       return this.state.defaultColumnColor;
     }
-  }
+  };
 
   render() {
     return (
@@ -37,23 +38,34 @@ class SeqColumn extends Component {
         style={{ background: "#" + this.backgroundColorPicker() }}
       >
         <SequenceStep
-          seqButton={this.props.buttonOne}
+        
+          allButtons={this.props.buttonOne}
+          columnNum={this.props.columnNum}
+          isPressed={this.props.isPressed}
           className="SequenceStep"
         />
         <SequenceStep
-          seqButton={this.props.buttonTwo}
+          allButtons={this.props.buttonTwo}
+          columnNum={this.props.columnNum}
+          isPressed={this.props.isPressed}
           className="SequenceStep"
         />
         <SequenceStep
-          seqButton={this.props.buttonThree}
+          allButtons={this.props.buttonThree}
+          columnNum={this.props.columnNum}
+          isPressed={this.props.isPressed}
           className="SequenceStep"
         />
         <SequenceStep
-          seqButton={this.props.buttonFour}
+          allButtons={this.props.buttonFour}
+          columnNum={this.props.columnNum}
+          isPressed={this.props.isPressed}
           className="SequenceStep"
         />
         <SequenceStep
-          seqButton={this.props.buttonFive}
+          allButtons={this.props.buttonFive}
+          columnNum={this.props.columnNum}
+          isPressed={this.props.isPressed}
           className="SequenceStep"
         />
       </div>
