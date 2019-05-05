@@ -4,15 +4,16 @@ import kickSound from "../sounds/kick.wav";
 import Tone from "tone";
 import "../App.css";
 import SeqColumn from "./seqcolumn";
+import hihatSound from "../sounds/closedhi.wav";
 
-var metronome = new Tone.Player({
-  url: metronomeSound,
+var kick = new Tone.Player({
+  url: kickSound,
 
   autostart: false
 }).toMaster();
 
-var kick = new Tone.Player({
-  url: kickSound,
+var snare = new Tone.Player({
+  url: hihatSound,
 
   autostart: false
 }).toMaster();
@@ -24,7 +25,8 @@ class DrumPatternContainer extends Component {
     this.state = {
       inputBpm: 0,
       isSeqPlaying: false,
-      counter: 0
+      counter: 0,
+      columnRowScience: [{ row: 0, column: 0 }, {}, {}]
     };
     console.log(this.state);
     console.log(this.state.counter);
@@ -55,63 +57,83 @@ class DrumPatternContainer extends Component {
   metronome = () => {
     console.log("imbeingpressed:)");
 
-    Tone.Transport.scheduleRepeat(function(time) {
-      metronome.start();
+    Tone.Transport.scheduleRepeat(time => {
+      let columnRowScience = this.state.columnRowScience;
+      for (let i = 0; i < columnRowScience.length; i++) {
+        if (columnRowScience[i].col === this.state.counter) {
+          console.log(columnRowScience[i].row, "this the row");
+          if (columnRowScience[i].row === 1) {
+            kick.start();
+          }
+          if (columnRowScience[i].row === 2) {
+            snare.start();
+          }
+        }
+      }
     }, "4n");
   };
 
-  seqBrainKick = () => {
-    if (this.state.isPressed === true) {
-      console.log("we in here?");
-      return kick.start();
-    }
-    if (this.props.isPressed === true) {
-      console.log("baba hotel");
-      return kick.start();
-    }
-  };
-
-  buttonOne = () => {
+  buttonOne = (col, isPressed) => {
+    let columnRowScience = this.state.columnRowScience;
+    console.log(col, isPressed, "two args");
     console.log("i am button one");
-    console.log(this.kick);
-    this.setState({ isPressed1: true });
-    if (this.state.isPressed1 === true) {
-      this.setState({ isPressed1: false });
+    if (isPressed === true) {
+      this.setState({
+        columnRowScience: this.state.columnRowScience.concat({
+          row: 1,
+          col: col
+        })
+      });
+    } else {
+      for (let i = 0; i < columnRowScience.length; i++) {
+        if (columnRowScience[i].row === 1 && columnRowScience[i].col === col) {
+          columnRowScience.splice(i, 1);
+          this.setState({ columnRowScience: columnRowScience });
+        }
+      }
     }
 
     return kick.start();
   };
 
-  buttonTwo = () => {
+  buttonTwo = (col, isPressed) => {
+    let columnRowScience = this.state.columnRowScience;
+    console.log(col, isPressed, "two args");
     console.log("i am button two");
-    this.setState({ isPressed2: true });
-    if (this.state.isPressed2 === true) {
-      this.setState({ isPressed2: false });
+    if (isPressed === true) {
+      this.setState({
+        columnRowScience: this.state.columnRowScience.concat({
+          row: 2,
+          col: col
+        })
+      });
+    } else {
+      for (let i = 0; i < columnRowScience.length; i++) {
+        if (columnRowScience[i].row === 2 && columnRowScience[i].col === col) {
+          columnRowScience.splice(i, 2);
+          this.setState({ columnRowScience: columnRowScience });
+        }
+      }
     }
+    return snare.start();
   };
 
-  buttonThree = () => {
-    console.log("button three");
-    this.setState({ isPressed3: true });
-    if (this.state.isPressed3 === true) {
-      this.setState({ isPressed3: false });
-    }
+  buttonThree = (col, isPressed) => {
+    this.setState({
+      columnRowScience: this.state.columnRowScience.concat({ row: 3, col: col })
+    });
   };
 
-  buttonFour = () => {
-    console.log("button four");
-    this.setState({ isPressed4: true });
-    if (this.state.isPressed4 === true) {
-      this.setState({ isPressed4: false });
-    }
+  buttonFour = (col, isPressed) => {
+    this.setState({
+      columnRowScience: this.state.columnRowScience.concat({ row: 4, col: col })
+    });
   };
 
-  buttonFive = () => {
-    console.log("button five");
-    this.setState({ isPressed5: true });
-    if (this.state.isPressed5 === true) {
-      this.setState({ isPressed5: false });
-    }
+  buttonFive = (col, isPressed) => {
+    this.setState({
+      columnRowScience: this.state.columnRowScience.concat({ row: 5, col: col })
+    });
   };
 
   handleSubmit = event => {
@@ -119,7 +141,7 @@ class DrumPatternContainer extends Component {
     Tone.Transport.start();
     this.setState({ isSeqPlaying: true, counter: this.state.counter + 1 });
     this.metronome();
-    this.seqBrainKick();
+
     console.log(this.props);
 
     this.interval = setInterval(() => {

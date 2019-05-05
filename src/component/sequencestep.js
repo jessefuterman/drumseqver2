@@ -16,15 +16,18 @@ class SequenceStep extends Component {
 
   handleClick = event => {
     event.preventDefault();
-    console.log(this.props);
+    console.log(this.state.isPressed);
     ///this.setState({ isPressed: false });
 
-    this.props.allButtons(this.props.columnNum);
-    this.props.allButtons(this.state.isPressed === true);
-    this.setState({ isPressed: true });
     if (this.state.isPressed === true) {
-      this.setState({ isPressed: false });
+      this.setState({ isPressed: false }, () => this.props.allButtons(this.props.columnNum, this.state.isPressed)); 
+    } else if (this.state.isPressed === false) {
+      console.log(this.state.isPressed, "after else if");
+      this.setState({ isPressed: true },  ()  => this.props.allButtons(this.props.columnNum, this.state.isPressed))
+      console.log("after elseif1 again", this.state.isPressed);
     }
+    console.log("after elseif2 again", this.state.isPressed);
+    
 
     //           this.buttonTwo();
 
