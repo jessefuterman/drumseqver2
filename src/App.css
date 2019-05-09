@@ -1,33 +1,71 @@
 .App-header {
-  background-color: whitesmoke;
+   background-color: rgb(63, 23, 23); 
   min-height: 100vh;
+  
+
 }
 
 .SequenceStep {
   width: 40px;
   height: 40px;
   bottom: 0px;
-  
+
   margin: 10px;
 }
 
 .DrumPatternContainer {
-  background-color: rgb(65, 77, 95);
- 
+  background-color: rgb(0, 166, 231);
   justify-content: center;
   display: flex;
+  height: 500px;
 
   position: absolute;
   bottom: 0px;
 }
 
+.button {
+  writing-mode: vertical-rl;
+  width: 100px;
+  
+  background: #D3D3D3
+}
+.buttonstop{
+  background:#D3D3D3
+}
+
 .SeqColumn {
-  background-color: #ffffff;
+  background-color: rgb(78, 76, 76);
   align-items: center;
   justify-content: center;
-  
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.melodyBox {
+
+  background-color: rgb(175, 62, 62);
+  display: flex;
+
+  width: 1053px;
+  top: 300px;
+  height: 200px;
+  position: absolute;
+  left: 228px;
+  bottom: 200px
+  
+
+
+}
+
+.melodyButton{
+  
+    width: 80px;
+    height: 80px;
+    bottom: 0px;
+  
+    margin: 10px;
+  
+
 }

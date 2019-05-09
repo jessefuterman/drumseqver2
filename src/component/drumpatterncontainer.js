@@ -8,6 +8,7 @@ import hihatSound from "../sounds/closedhi.wav";
 import clap from "../sounds/808clap.wav";
 import boom from "../sounds/boom.wav";
 import snare from "../sounds/snare.wav";
+import MelodyBox from "./melodybox"
 
 var kick = new Tone.Player({
   url: kickSound,
@@ -256,12 +257,21 @@ class DrumPatternContainer extends Component {
 
   render() {
     return (
+      <div>
+      
       <div className="DrumPatternContainer">
-        <button onClick={this.stop}></button>
+      
+      <button onClick={this.stop } className = "buttonstop">STOP  </button>
+        <button className="button" onClick={this.handleSubmit}>
+       GO
+         
+        </button>
+
         <form
           onSubmit={this.handleSubmit}
           style={{ display: "" + this.state.display }}
         >
+          {" "}
           <label>
             <input
               type="text"
@@ -269,8 +279,10 @@ class DrumPatternContainer extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Suggested BPM: 125-192" />
         </form>
+
+       
 
         <SeqColumn
           greeting={this.lightupLogic(1)}
@@ -433,6 +445,8 @@ class DrumPatternContainer extends Component {
           columnNum={(this.ColumnNum = 16)}
           isPressed={this.state.isPressed}
         />
+        <MelodyBox className="melodyBox">  </MelodyBox>
+      </div>
       </div>
     );
   }

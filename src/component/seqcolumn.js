@@ -3,7 +3,7 @@ import SequenceStep from "./sequencestep.js";
 
 import "../App.css";
 var red = "FF0000";
-var white = "FFFFFF";
+var white = "D3D3D3";
 
 class SeqColumn extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class SeqColumn extends Component {
     console.log(event.target.value);
     console.log("is this working?");
   };
- 
+
   backgroundColorPicker = () => {
     let isSeqPlaying = this.props.greeting;
     if (isSeqPlaying === true) {
@@ -37,7 +37,6 @@ class SeqColumn extends Component {
         style={{ background: "#" + this.backgroundColorPicker() }}
       >
         <SequenceStep
-        
           allButtons={this.props.buttonOne}
           columnNum={this.props.columnNum}
           isPressed={this.props.isPressed}

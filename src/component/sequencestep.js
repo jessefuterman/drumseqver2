@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../App.css";
 
 var black = "424242";
-var white = "f5f5f5";
+var white = "ffd800";
 class SequenceStep extends Component {
   constructor(props) {
     super(props);
