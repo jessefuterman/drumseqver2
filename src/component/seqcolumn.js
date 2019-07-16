@@ -16,9 +16,8 @@ class SeqColumn extends Component {
   handleChange = event => {
     event.preventDefault();
     this.setState({ columnColor: event.target.value });
-    console.log("this is the state", this.state);
-    console.log(event.target.value);
-    console.log("is this working?");
+   
+    
   };
 
   backgroundColorPicker = () => {
